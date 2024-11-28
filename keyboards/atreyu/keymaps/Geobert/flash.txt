@@ -1,0 +1,2 @@
+// -c is to call `make clean`
+qmk flash -c -kb atreyu/rev2 -km ergol -e CONVERT_TO=elite_pi
