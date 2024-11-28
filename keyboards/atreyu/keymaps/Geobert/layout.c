@@ -44,7 +44,6 @@ enum custom_layers {
 enum custom_keycodes {
     TGL_GAME = SAFE_RANGE,
     LLOCK,
-    GRV_CIR,
     TYPO
 };
 

@@ -35,68 +35,26 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool is_bepo = false;
-bool typo_pressed = false;
-bool can_release_typo = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
+    if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
 
     if (IS_LAYER_ON(_TYPO)) {
         if (record->event.pressed) {
             // if (keycode == KC_BSPC || keycode == KC_DEL) {
             //     return true;
             // }
-            tap_code16(KC_O);
-            // wait_ms(150);
-            tap_code16(keycode);
+            wait_ms(5);
+            tap_code16_delay(KC_O, 5);
+            wait_ms(5);
+            tap_code16_delay(keycode, 5);
             return false;
-            // if (!typo_pressed) {
-            //     clear_oneshot_layer_state(ONESHOT_PRESSED);
-            //     reset_oneshot_layer();
-            //     // layer_off(_TYPO);
-            //     if (keycode == KC_BSPC || keycode == KC_DEL) {
-            //         return false;
-            //     }
-            //     tap_code16(KC_O);
-            //     tap_code16(keycode);
-            //     return false;
-            // } else {
-            //     can_release_typo = true;
-            //     tap_code16(KC_O);
-            //     tap_code16(keycode);
-            //     set_oneshot_layer(_TYPO, ONESHOT_START);
-            //     return false;
-            // }
-        }
+       }
 
         return true;
     }
 
     switch (keycode) {
-        // case TYPO:
-        //     if (record->event.pressed) {
-        //         // uint8_t temp_mods = get_mods(); // store held mods
-        //         // typo_pressed = true;
-        //         // if (temp_mods & MOD_MASK_SHIFT && !IS_LAYER_ON(_TYPO)) {
-        //         //     tap_code16(KC_O);
-        //         //     return true;
-        //         // } else {
-        //         //     // set_oneshot_layer(_TYPO, ONESHOT_START);
-        //         //     // layer_on(_TYPO);
-        //         //     return false;
-        //         // }
-        //     }
-        //     // else {
-        //         // typo_pressed = false;
-        //         // if (can_release_typo)
-        //         // {
-        //         //     can_release_typo = false;
-        //         //     clear_oneshot_layer_state(ONESHOT_PRESSED);
-        //         //     // layer_off(_TYPO);
-        //         // }
-        //     // }
-        //
-        //     break;
-        case TGL_GAME:
+       case TGL_GAME:
             if (record->event.pressed) {
                 if (is_bepo) {
                     is_bepo = false;
@@ -105,27 +63,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     is_bepo = true;
                     default_layer_set(1UL << _GAME);
                 }
-            }
-            break;
-        case GRV_CIR:
-            if (record->event.pressed) {
-                uint8_t temp_mods = get_mods();  //store held mods
-                clear_mods();
-                if (temp_mods & MOD_MASK_SHIFT) {
-                    tap_code16(ACC_CIR);
-                } else {
-                    tap_code16(EL_GRV);
-                }
-                set_mods(temp_mods);
-            }
-            break;
-        case EL_MINS:
-            if (record->event.pressed && is_caps_word_on()) {
-                uint8_t temp_mods = get_mods();  //store held mods
-                clear_mods();
-                tap_code16(ALGR(KC_V));
-                set_mods(temp_mods);
-                return false;
             }
             break;
     }
