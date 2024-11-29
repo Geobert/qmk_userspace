@@ -40,7 +40,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     if (IS_LAYER_ON(_TYPO)) {
         if (record->event.pressed) {
-            if (keycode >= KC_A && keycode <= KC_0) {
+            if ((keycode >= KC_A && keycode <= KC_0) || keycode == KC_SPC) {
                 int oneshot_state = get_oneshot_mods();
                 int state = get_mods();
                 clear_mods();
