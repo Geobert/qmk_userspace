@@ -40,14 +40,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     if (IS_LAYER_ON(_TYPO)) {
         if (record->event.pressed) {
-            // if (keycode == KC_BSPC || keycode == KC_DEL) {
-            //     return true;
-            // }
-            wait_ms(5);
-            tap_code16_delay(KC_O, 5);
-            wait_ms(5);
-            tap_code16_delay(keycode, 5);
-            return false;
+            if (keycode >= KC_A && keycode <= KC_0) {
+                int oneshot_state = get_oneshot_mods();
+                int state = get_mods();
+                clear_mods();
+                clear_oneshot_mods();
+                wait_ms(5);
+                tap_code16_delay(KC_O, 5);
+                set_mods(state);
+                set_oneshot_mods(oneshot_state);
+                wait_ms(5);
+                tap_code16_delay(keycode, 5);
+                return false;
+            }
        }
 
         return true;
