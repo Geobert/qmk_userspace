@@ -45,12 +45,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 int state = get_mods();
                 clear_mods();
                 clear_oneshot_mods();
-                wait_ms(5);
-                tap_code16_delay(KC_O, 5);
+                wait_ms(4);
+                tap_code16_delay(KC_O, 4);
                 set_mods(state);
                 set_oneshot_mods(oneshot_state);
-                wait_ms(5);
-                tap_code16_delay(keycode, 5);
+                wait_ms(4);
+                tap_code16_delay(keycode, 4);
                 return false;
             }
        }
