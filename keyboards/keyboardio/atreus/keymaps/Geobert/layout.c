@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ALGR(KC_Q), ALGR(KC_W),    ALGR(KC_E),    ALGR(KC_R),    ALGR(KC_T),                    ALGR(KC_Y),     ALGR(KC_U),    ALGR(KC_I),    ALGR(KC_O),    ALGR(KC_P),
     ALGR(KC_A), ALGR(KC_S),    ALGR(KC_D),    ALGR(KC_F),    ALGR(KC_G),                    ALGR(KC_H),     ALGR(KC_J),    ALGR(KC_K),    ALGR(KC_L),    ALGR(KC_SCLN),
     ALGR(KC_Z), ALGR(KC_X),    ALGR(KC_C),    ALGR(KC_V),    ALGR(KC_B), _______,  _______, ALGR(KC_N),     ALGR(KC_M),    ALGR(KC_COMM), ALGR(KC_DOT),  ALGR(KC_SLSH),
-    _______  ,  _______,       _______,       ALGR(KC_SPC),  _______,    KC_BSPC,  C(KC_BSPC),_______,        ORSFT,       MO(_NUM),     _______,          XXXXXXX
+    _______  ,  _______,       _______,        _______, ALGR(KC_SPC) ,    KC_BSPC,  C(KC_BSPC),_______,        ORSFT,       MO(_NUM),     _______,          XXXXXXX
 ),
 
 [_MEDIA] = LAYOUT(
