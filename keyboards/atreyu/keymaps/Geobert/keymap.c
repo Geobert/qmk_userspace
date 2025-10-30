@@ -78,7 +78,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 void oneshot_layer_changed_user(uint8_t layer) {
     if (layer == _TYPO) {
-        bool shifted = get_mods() & MOD_MASK_SHIFT;
+        bool shifted = (get_mods() & MOD_MASK_SHIFT) || (get_oneshot_mods() & MOD_MASK_SHIFT) ;
         if (shifted) {
             tap_code16(KC_O);
             clear_oneshot_layer_state(ONESHOT_PRESSED);
