@@ -35,11 +35,17 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool is_bepo = false;
+bool cancel_typo = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
 
     if (IS_LAYER_ON(_TYPO)) {
         if (record->event.pressed) {
+            if (cancel_typo) {
+                cancel_typo = false;
+                clear_oneshot_layer_state(ONESHOT_PRESSED);
+                return true;
+            }
             if ((keycode >= KC_A && keycode <= KC_0) || keycode == KC_SPC
                 || keycode == KC_SCLN || keycode == KC_SLSH
                 || keycode == KC_DOT || keycode == KC_COMM) {
@@ -81,7 +87,9 @@ void oneshot_layer_changed_user(uint8_t layer) {
         bool shifted = (get_mods() & MOD_MASK_SHIFT) || (get_oneshot_mods() & MOD_MASK_SHIFT) ;
         if (shifted) {
             tap_code16(KC_O);
-            clear_oneshot_layer_state(ONESHOT_PRESSED);
+            clear_mods();
+            clear_oneshot_mods();
+            cancel_typo = true;
         }
     }
 }
